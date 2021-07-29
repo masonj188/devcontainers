@@ -194,3 +194,34 @@ ENV PATH=/usr/local/go/bin:$PATH
 ```
 
 From here, you might add debuggers, network tools, or anything else you use for development on your project.
+
+
+## Using Dockerhub
+
+Whether you start from a blank Dockerfile or you modify one of the pre-made Dockerfiles existing in Dockerhub, you can upload your prepared image to [Dockerhub](https://hub.docker.com/).
+
+While it is completely fine to build an image locally using a Dockerfile, if the build process is particularly long you may not want everyone using your image to have to build it when they want to use it. To eliminate build times, you can build an image once, and then tag and upload that image to Dockerhub. Once the image is in Dockerhub, your users can access the image by pulling the image from the network instead of building it locally using the Dockerfile.
+
+### Using Dockerhub Images in devcontainer.json
+To use an image that's available on Dockerhub, add the `image` directive to your `devcontainer.json` file with the value being the Dockerhub path of the image, like so:
+
+```json
+"image":"masonj188/pacman-dev-env:1.0.0"
+```
+
+Using the `image` directive instead of the `build` directive tells VS Code to pull the image from Dockerhub instead of trying to build an image from a local Dockerfile.
+
+### Pushing Images to Dockerhub
+
+To push an image to Dockerhub follow these steps:
+
+1. Head to the [Dockerhub website](https://hub.docker.com/) and create an account if you don't already have one.
+    - Free accounts are allowed to host as many public images as they want, but you're limited to _one_ private repository without a paid account.
+    - Make sure you never add any sensitive data to an image that's hosted publicly on Dockerhub.
+
+2. Login to Dockerhub using the Docker cli command `docker login`.
+
+3. Build and tag your image using `docker build . -t <username>/<repository>:<tag>` from the same directory as your Dockerfile.
+    - To learn more about tagging images read the documentation [here](https://docs.docker.com/engine/reference/commandline/build/#tag-an-image--t).
+
+4. Update your `devcontainer.json` file to reference your newly pushed image.
