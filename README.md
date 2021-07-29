@@ -174,7 +174,7 @@ If your project uses multiple programming languages it might be easiest to start
 
 An example `Dockerfile` that installs `Python3.9` from the official Ubuntu repositories and installs `Go` manually might look like this:
 
-```
+```Dockerfile
 # See here for image contents: https://github.com/microsoft/vscode-dev-containers/tree/v0.187.0/containers/ubuntu/.devcontainer/base.Dockerfile
 
 # [Choice] Ubuntu version: bionic, focal
